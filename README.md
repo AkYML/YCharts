@@ -193,8 +193,59 @@ Let's see how we can use the chart components and style them with available cust
     <p> Grouped Bar chart looks like this!</p>
     </div>
     </figure>
+4. **Stacked Bar Chart:**
+   * Create list of grouped combinations of bar chart data using the random generator extension
+     and  `BarPlotData` data class
 
-4. **Pie Chart:**
+     ```
+        val groupBarPlotData = BarPlotData(
+                        groupBarList = DataUtils.getGroupBarChartData(
+                            barChartListSize,
+                            maxRange,
+                            eachGroupBarSize
+                        ),
+                        barColorPaletteList = getColorPaletteList(barSize)
+                    )
+     ```
+
+   * Initialize X and Y Axis builders using the `AxisData` data class.
+   ```
+           val xAxisData = AxisData.Builder()
+               .axisStepSize(30.dp)
+               .steps(groupBarData.size - 1)
+               .bottomPadding(40.dp)
+               .labelData { index -> groupBarData[index].label }
+               .build()
+      
+    val yAxisData = AxisData.Builder()
+               .steps(yStepSize)
+               .labelAndAxisLinePadding(20.dp)
+               .axisOffset(20.dp)
+               .labelData { index -> (index * (maxRange / yStepSize)).toString() }
+               .build()
+   ```
+   * Initialize the group bar chart data with axis and other line related styling
+     using `GroupBarChartData`
+     data class.
+   ```
+      val groupBarChartData = GroupBarChartData(
+                        barPlotData = groupBarPlotData,
+                        xAxisData = xAxisData,
+                        yAxisData = yAxisData
+                    )
+   ```
+   * Use the _**`GroupBarChart`**_ Component to render the bar chart with the above input params.
+   ``` 
+   GroupBarChart(modifier = Modifier.height(300.dp), groupBarChartData = groupBarChartData)
+   ```
+   <figure>
+   <div align = "center">
+    <img width=338 src="https://user-images.githubusercontent.com/107846675/189845009-6ef2ccc6-3c75-446e-9273-fe1b1e1e94d0.png" />
+    <p> Grouped Bar chart looks like this!</p>
+    </div>
+    </figure>
+
+5. **Pie Chart:**
    * Create list of slices using the `PieChartData` data class.
 
     ```
@@ -234,7 +285,7 @@ Let's see how we can use the chart components and style them with available cust
     </div>
     </figure>
 
-5. **Donut Chart:**
+6. **Donut Chart:**
    * Similar to pie chart here we need create list of slices using the `PieChartData` data class.
 
     ```
@@ -273,9 +324,50 @@ Let's see how we can use the chart components and style them with available cust
     <img width=233 src="https://user-images.githubusercontent.com/107846675/189868490-cbaecf87-2beb-4788-ba8e-f57b667cbf10.png" />
     <p>  Donut chart looks like this!</p>
     </div>
-    </figure>    
+    </figure> 
+   
+7. **Bubble Chart:**
+   * Similar to pie chart here we need create list of slices using the `PieChartData` data class.
+
+   ```
+       val donutChartData = BubbleChartData(
+       bubbles = listOf(
+           Bubble("HP", 15f, Color(0xFF5F0A87)),
+           Bubble("Dell", 30f, Color(0xFF20BF55)),
+           Bubble("Lenovo", 40f,  Color(0xFFEC9F05)),
+           Bubble("Asus", 10f, Color(0xFFF53844))
+       )
+     )
+    ```
+   * Initialize the pie chart config with `PieChartConfig` data class inorder to achieve styling and
+    configurations related to pie chart
+   ```
+   val donutChartConfig = PieChartConfig(
+       percentVisible = true,
+       percentageFontSize = 42.sp,
+       strokeWidth = 120f,
+       percentColor = Color.Black,
+       activeSliceAlpha = .9f,
+       isAnimationEnable = true
+   )
+   ```
+   * Finally, use the _**`DonutPieChart`**_ component to render the chart.
+   ```  
+   DonutPieChart( modifier = Modifier
+           .fillMaxWidth()
+           .height(500.dp),
+       donutChartData,
+       donutChartConfig
+   ) 
+   ```
+    <figure>
+   <div align = "center">
+   <img width=233 src="https://user-images.githubusercontent.com/107846675/189868490-cbaecf87-2beb-4788-ba8e-f57b667cbf10.png" />
+   <p>  Donut chart looks like this!</p>
+   </div>
+   </figure>    
     
-6. **Combined Chart:**
+8. **Combined Chart:**
 
    * Similar to line and bar chart we can combine both entities in one chart, just need  to initialize the line and bar plot data using the random generator extension and add styling related to individual component.
 
@@ -350,7 +442,7 @@ Let's see how we can use the chart components and style them with available cust
 
 ## Accessibility Support
 To interact with your device with touch and spoken feedback, you can turn on the TalkBack screen reader. TalkBack describes the graphs/charts when tapped on the graph container.
-Compose views by deafult supports accessibility services, but for views drawn using canvas has no straight forward approach as of now, hence all our graph components supports an accessibility popup out of the box that will be shown over the graph with tapped on the container, with all the values described in an order to support accessibility services. User will be able to scroll the popup and find all the points, bars, slices or combined values in a descriptive manner, where user can tap and talkback would read it out loud.
+Compose views by default supports accessibility services, but for views drawn using canvas has no straight forward approach as of now, hence all our graph components supports an accessibility popup out of the box that will be shown over the graph with tapped on the container, with all the values described in an order to support accessibility services. User will be able to scroll the popup and find all the points, bars, slices or combined values in a descriptive manner, where user can tap and talkback would read it out loud.
 
 <figure>
 <div align = "center">
