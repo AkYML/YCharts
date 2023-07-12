@@ -2,6 +2,7 @@ package co.yml.kmm.charts.common.utils
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.text.ExperimentalTextApi
 import co.yml.kmm.charts.common.extensions.formatToSinglePrecision
 import co.yml.kmm.charts.common.model.LegendLabel
 import co.yml.kmm.charts.common.model.Point
@@ -10,6 +11,7 @@ import co.yml.kmm.charts.ui.barchart.models.GroupBar
 import co.yml.kmm.charts.ui.bubblechart.model.Bubble
 import co.yml.kmm.charts.ui.bubblechart.model.BubbleGradientType
 import co.yml.kmm.charts.ui.bubblechart.model.BubbleStyle
+import co.yml.kmm.charts.ui.linechart.model.SelectionHighlightPopUp
 import kotlin.random.Random
 
 object DataUtils {
@@ -71,6 +73,7 @@ object DataUtils {
      * @param start: X values to start from. ex: 50 to 100
      * @param maxRange: Max range of Y values
      */
+    @OptIn(ExperimentalTextApi::class)
     fun getBubbleChartDataWithGradientStyle(
         points: List<Point>,
         minDensity: Float = 10F,
@@ -89,7 +92,8 @@ object DataUtils {
                         Bubble(
                             center = point,
                             density = (minDensity.toInt() until maxDensity.toInt()).random().toFloat(),
-                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2,bubbleColor3,bubbleColor4), useGradience = true, gradientType = BubbleGradientType.RadialGradient)
+                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2,bubbleColor3,bubbleColor4), useGradience = true, gradientType = BubbleGradientType.RadialGradient),
+                            selectionHighlightPopUp = SelectionHighlightPopUp()
                         )
                     )
                 }
@@ -98,7 +102,8 @@ object DataUtils {
                         Bubble(
                             center = point,
                             density = (minDensity.toInt() until maxDensity.toInt()).random().toFloat(),
-                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2), useGradience = true, gradientType = BubbleGradientType.LinearGradient)
+                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2), useGradience = true, gradientType = BubbleGradientType.LinearGradient),
+                            selectionHighlightPopUp = SelectionHighlightPopUp()
                         )
                     )
                 }
@@ -107,7 +112,8 @@ object DataUtils {
                         Bubble(
                             center = point,
                             density = (minDensity.toInt() until maxDensity.toInt()).random().toFloat(),
-                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2), useGradience = true, gradientType = BubbleGradientType.VerticalGradient)
+                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2), useGradience = true, gradientType = BubbleGradientType.VerticalGradient),
+                            selectionHighlightPopUp = SelectionHighlightPopUp()
                         )
                     )
                 }
@@ -116,7 +122,8 @@ object DataUtils {
                         Bubble(
                             center = point,
                             density = (minDensity.toInt() until maxDensity.toInt()).random().toFloat(),
-                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2), useGradience = true, gradientType = BubbleGradientType.HorizontalGradient)
+                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2), useGradience = true, gradientType = BubbleGradientType.HorizontalGradient),
+                            selectionHighlightPopUp = SelectionHighlightPopUp()
                         )
                     )
                 }
@@ -125,7 +132,8 @@ object DataUtils {
                         Bubble(
                             center = point,
                             density = (minDensity.toInt() until maxDensity.toInt()).random().toFloat(),
-                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2,bubbleColor3,bubbleColor4), useGradience = true, gradientType = BubbleGradientType.HorizontalGradient,tileMode = TileMode.Repeated)
+                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2,bubbleColor3,bubbleColor4), useGradience = true, gradientType = BubbleGradientType.HorizontalGradient,tileMode = TileMode.Repeated),
+                            selectionHighlightPopUp = SelectionHighlightPopUp()
                         )
                     )
                 }
@@ -134,7 +142,8 @@ object DataUtils {
                         Bubble(
                             center = point,
                             density = (minDensity.toInt() until maxDensity.toInt()).random().toFloat(),
-                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2,bubbleColor3,bubbleColor4), useGradience = true, gradientType = BubbleGradientType.HorizontalGradient,tileMode = TileMode.Mirror)
+                            bubbleStyle = BubbleStyle(gradientColors = listOf(bubbleColor1, bubbleColor2,bubbleColor3,bubbleColor4), useGradience = true, gradientType = BubbleGradientType.HorizontalGradient,tileMode = TileMode.Mirror),
+                            selectionHighlightPopUp = SelectionHighlightPopUp()
                         )
                     )
                 }

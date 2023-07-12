@@ -454,7 +454,8 @@ internal fun BubbleChartWithGrid() {
         DataUtils.getBubbleChartDataWithGradientStyle(pointsData),
         xAxisData = xAxisData,
         yAxisData = yAxisData,
-        gridLines = GridLines()
+        gridLines = GridLines(),
+
     )
 
     BubbleChart(
